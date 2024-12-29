@@ -1,0 +1,10 @@
+
+PREMIERE LECTURE
+
+1. Lit le fichier, verifie le path et stock les infos . 
+Si a la fin de la premiere lecture , info vide : on quitte
+    
+
+1. Trouver la map dans le fichier : 
+    S'assurer qu'elle est presente
+    En derniere position
