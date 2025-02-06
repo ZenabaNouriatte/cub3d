@@ -68,7 +68,7 @@ PRINTF_OBJ = $(PRINTF_SRC:%.c=%.o)
 OBJ = $(SRC:%.c=%.o)
 
 OBJS = $(GNL_OBJ) $(OBJ) $(PRINTF_OBJ)
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 HEADERS = libft.h
 
 all: $(NAME)

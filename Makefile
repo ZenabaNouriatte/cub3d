@@ -6,7 +6,7 @@
 #    By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 15:18:49 by lasablon          #+#    #+#              #
-#    Updated: 2024/12/29 22:05:48 by zmogne           ###   ########.fr        #
+#    Updated: 2025/01/31 14:50:15 by zmogne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,29 @@ NAME = cub3D
 SRCS =	src/main.c \
 		src/events.c \
 		src/utils.c \
-		src/init.c \
+		src/utils_2.c \
 		src/free.c \
-		src/Parsing/valid_info.c \
-		src/Parsing/utils.c \
+		src/minimap.c \
+		src/Parsing/read_parse_file.c \
 		src/Parsing/valid_path.c \
 		src/Parsing/valid_textures.c \
-		src/Parsing/valid_color.c
+		src/Parsing/valid_color.c \
+		src/Parsing/valid_color_utils.c \
+		src/Parsing/line_count.c \
+		src/Parsing/stock_map.c \
+		src/Parsing/stock_map_utils.c \
+		src/Parsing/parse_map.c \
+		src/Parsing/parsing_utils.c \
+		src/Parsing/parsing_utils2.c \
+		src/Parsing/validate_walls.c \
+		src/Parsing/check_walls.c \
+		src/Parsing/check_wall_utils.c \
+		src/graphics/raycasting.c \
+		src/graphics/raycasting2.c \
+		src/graphics/render.c \
+		src/graphics/textures.c \
+		src/graphics/init.c \
+		src/graphics/player_move.c
 		
 
 # OBJ FILES 
@@ -53,11 +69,16 @@ clean:
 
 fclean: clean
 	make clean -C mlx_linux
-	make clean -C libft
+	make fclean -C libft
 	rm mlx_linux/Makefile.gen 
 	rm mlx_linux/test/Makefile.gen 
 	rm -f $(NAME)
 	
 re : fclean all
 
+valgrind: $(NAME)
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) $(ARGS)
+# noter la map de cette facon ARGS=map/good_map/labyrinthe.cub
+
 .PHONY: all clean fclean re MLX $(LIBFT)
+

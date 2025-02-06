@@ -3,33 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:09:40 by lasablon          #+#    #+#             */
-/*   Updated: 2024/12/29 16:50:39 by lasablon         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:35:25 by zmogne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// function that translate trgb to an int value if you need it
-int	trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void	ft_put_pixel(t_data *data, int x, int y, int color)
+unsigned int	ft_get_pixel(t_img_data *image, int x, int y)
 {
 	char	*pxl;
 
-	if (x >= 0 && x < data->window.width && y >= 0 && y < data->window.height)
+	if (x >= 0 && x < image->width && y >= 0 && y < image->height)
 	{
-		pxl = data->window.img.addr + (y * data->window.img.line_length + x
-				* (data->window.img.bits_per_pixel / 8));
-		*(unsigned int *)pxl = color;
+		pxl = image->addr + (y * image->line_length + x * (image->bits_per_pixel
+					/ 8));
+		return (*(unsigned int *)pxl);
 	}
 	else
-		ft_putendl_fd("Error ft_put_pixel", 2);
+		ft_putstr_fd("Error ft_get_pixel\n", 2);
+	return (0);
 }
 
 int	is_player(char c)
@@ -37,78 +32,42 @@ int	is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int	is_walkable(char c)
-{
-	return (c == '0');
-}
-
-int	is_wall(char c)
-{
-	return (c == '1');
-}
-
-// THOSE ARE TEST FUNCTIONS
-char	**create_map(void)
-{
-	char	**map;
-
-	map = malloc(6 * sizeof(char *));
-	map[0] = ft_strdup("111111111111");
-	map[1] = ft_strdup("100000000001");
-	map[2] = ft_strdup("10000N000001");
-	map[3] = ft_strdup("100000000001");
-	map[4] = ft_strdup("111111111111");
-	map[5] = NULL;
-	return (map);
-}
-
-void	draw_map(t_data *data)
+int	check_player_position(t_map *map_data, char **map, int y)
 {
 	int	x;
-	int	y;
 
-	y = 0;
-	while (data->map.map[y])
+	x = 0;
+	while (map[y][x])
 	{
-		x = 0;
-		while (data->map.map[y][x])
+		if (is_player(map[y][x]))
 		{
-			if (data->map.map[y][x] == '1')
-				mlx_string_put(data->window.mlx, data->window.window, x * 10, (y
-						* 10) + 10, 0xFF0000, "1");
-			if (data->map.map[y][x] == '0')
-				mlx_string_put(data->window.mlx, data->window.window, x * 10, (y
-						* 10) + 10, 0xFFFFFF, "0");
-			if (is_player(data->map.map[y][x]))
-				mlx_string_put(data->window.mlx, data->window.window, x * 10, (y
-						* 10) + 10, 0x0000FF, "N");
-			x++;
+			if (map_data->square.x != -1 || map_data->square.y != -1)
+				return (ft_putstr_fd("Error\nOne player only\n", 2), -1);
+			map_data->square.x = x;
+			map_data->square.y = y;
+			map_data->initial_vue = map[y][x];
 		}
-		y++;
+		x++;
 	}
+	return (0);
 }
 
-void	set_player_position(t_map *map_data)
+int	set_player_position(t_map *map_data)
 {
-	int		x;
 	int		y;
 	char	**map;
 
+	map_data->square.x = -1;
+	map_data->square.y = -1;
 	y = 0;
 	map = map_data->map;
 	while (map[y])
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (is_player(map[y][x]))
-			{
-				map_data->player.x = x;
-				map_data->player.y = y;
-				map_data->initial_vue = 'N';
-			}
-			x++;
-		}
+		if (check_player_position(map_data, map, y) == -1)
+			return (-1);
 		y++;
 	}
+	if (map_data->square.x == -1 || map_data->square.y == -1)
+		return (ft_putstr_fd("Error\nOne player needed\n", 2), -1);
+	return (0);
 }

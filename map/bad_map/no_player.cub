@@ -1,0 +1,11 @@
+F 220,100, 0       
+C 225,30,0
+
+NO map/textures/labyrinthe/north.xpm
+EA map/textures/labyrinthe/est.xpm
+WE map/textures/labyrinthe/west.xpm
+SO map/textures/labyrinthe/west.xpm
+
+111
+101
+111

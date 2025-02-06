@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:02:46 by lasablon          #+#    #+#             */
-/*   Updated: 2024/12/27 13:00:20 by zmogne           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:39:30 by lasablon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	new[y] = '\0';
 	return (new);
 }
-

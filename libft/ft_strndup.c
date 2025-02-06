@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 23:18:26 by zmogne            #+#    #+#             */
-/*   Updated: 2024/12/26 23:28:18 by zmogne           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:38:54 by lasablon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t strnlen(const char *s, size_t n)
+static size_t	strnlen(const char *s, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] && i < n)
