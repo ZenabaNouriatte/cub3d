@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:49:53 by lasablon          #+#    #+#             */
-/*   Updated: 2025/01/31 15:10:37 by zmogne           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:15:09 by lasablon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include "../libft/libft.h"
 # include <complex.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -22,8 +23,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <errno.h>
-# define M_PI 3.14159265358979323846
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 600
 # define MINIMAP_WIDTH 250
@@ -94,7 +93,6 @@ typedef struct s_textures
 	t_img_data			images[4];
 }						t_textures;
 
-// parsing
 typedef struct s_map
 {
 	char				**map;
@@ -183,7 +181,6 @@ int						check_null_texture(t_data *data, char *f_line,
 							char *c_line);
 // valid_color
 int						color_info(char *line, char **f_line, char **c_line);
-int						valid_rgb_number(int *nb, t_data *data);
 int						color_nbr(char *line);
 int						is_color_line(const char *line, char color);
 int						is_only_spaces(const char *str);
@@ -191,10 +188,8 @@ int						check_commas_and_spacing(const char *line);
 int						count_tab(char **tab);
 
 // utils
-void					err(char *str, t_data *data, int flag_exit);
 char					*skip_spaces(char *str);
 int						count_commas(char *str);
-void					print_map(char **map);
 int						trgb(int t, int r, int g, int b);
 int						check_line_char(char *line);
 void					finish_reading_file(int fd);
@@ -211,7 +206,6 @@ void					ft_put_pixel(t_data *data, int x, int y, int color);
 
 // stock_map
 int						check_and_store_map(char *map_path, t_data *data);
-int						get_map_height(char *map_path);
 void					write_and_free(char *str, char *to_free);
 int						get_map_line(int fd, t_map_info *map_info);
 int						handle_line_processing(char *line, int current_line,
@@ -232,10 +226,9 @@ int						borders_spaces(t_map *map_data, int *i, int *j,
 int						check_walls(char **map, int height, int width);
 int						is_player(char c);
 int						is_walkable(char c);
-int						is_wall(char c);
 int						trgb(int t, int r, int g, int b);
-int						validate_cell_closure(int *row,
-							t_map *map, int j, int i);
+int						validate_cell_closure(int *row, t_map *map, int j,
+							int i);
 int						check_side_walls(char **map, int height);
 int						validate_closure(t_data *data);
 int						check_wall_gaps(char **map, int height);
@@ -244,6 +237,8 @@ int						check_wall_gaps(char **map, int height);
 int						initialize_minimap(t_window_data *data,
 							t_map *map_data);
 int						calculate_pixel_size(t_map *map_data);
+void					draw_minimap(t_data *data);
+
 // Raycasting
 t_double_Complex		set_initial_direction(char initial_vue);
 t_double_Complex		set_plane_vector(char initial_vue);
@@ -273,7 +268,4 @@ void					move_player_left_right(t_map *map_data, int keycode,
 							t_double_Complex *dir, t_double_Complex *player);
 void					rotate_camera(t_map *map, double rotspeed);
 double					new_position(double pos, double dir, char operator);
-// THOSE ARE TEST FUNCTIONS
-void					draw_minimap(t_data *data);
-void					print_data(t_data *data);
 #endif

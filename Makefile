@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zmogne <zmogne@student.42.fr>              +#+  +:+       +#+         #
+#    By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 15:18:49 by lasablon          #+#    #+#              #
-#    Updated: 2025/01/31 14:50:15 by zmogne           ###   ########.fr        #
+#    Updated: 2025/02/04 15:11:49 by lasablon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,10 +75,6 @@ fclean: clean
 	rm -f $(NAME)
 	
 re : fclean all
-
-valgrind: $(NAME)
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) $(ARGS)
-# noter la map de cette facon ARGS=map/good_map/labyrinthe.cub
 
 .PHONY: all clean fclean re MLX $(LIBFT)
 

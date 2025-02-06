@@ -6,7 +6,7 @@
 /*   By: lasablon <lasablon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:05:27 by lasablon          #+#    #+#             */
-/*   Updated: 2025/01/22 18:18:16 by lasablon         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:18:23 by lasablon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ double	new_position(double pos, double dir, char operator)
 {
 	double	movespeed;
 
-	movespeed = 0.1;
+	movespeed = 0.07;
 	if (operator == '+')
 		return (pos + dir * movespeed);
 	if (operator == '-')
