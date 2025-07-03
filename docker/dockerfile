@@ -1,0 +1,24 @@
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libx11-dev libxext-dev libbsd-dev libxrandr-dev libxpm-dev \
+    x11-utils xterm \
+    zlib1g-dev \
+    supervisor \
+    xfce4 xfce4-goodies tightvncserver novnc websockify \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV DISPLAY=:1
+WORKDIR /cub3d
+
+COPY . /cub3d
+RUN make
+
+COPY docker/start.sh /start.sh
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN chmod +x /start.sh
+
+EXPOSE 8080
+CMD ["/start.sh"]
