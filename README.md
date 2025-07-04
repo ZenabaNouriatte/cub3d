@@ -110,6 +110,16 @@ cub3d/
 - **Containerisation** : Docker + VNC + noVNC
 - **Environnement** : Linux/Ubuntu
 
+## 🔍 Aperçu visuel
+
+### Rendu map "museum.cub"
+![Capture du jeu Cub3D](screenshots/2.png)
+
+### Map "bubble_gum.cub"
+![Bubble Gum](screenshots/3.png)
+
+### Map "nympheas.cub"
+![Bubble Gum](screenshots/1.png)
 ---
 
 *Projet réalisé dans le cadre du cursus de l'École 42*
