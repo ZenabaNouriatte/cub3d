@@ -119,7 +119,7 @@ cub3d/
 ![Bubble Gum](screenshots/3.png)
 
 ### Map "nympheas.cub"
-![Bubble Gum](screenshots/1.png)
+![Nympheas](screenshots/1.png)
 ---
 
 *Projet réalisé dans le cadre du cursus de l'École 42*
